@@ -2,11 +2,13 @@ from flask import Flask, request, jsonify
 import os
 from transcribe import video_transcribe 
 from summarize import transcript_summarize 
+from flask_cors import CORS 
 
 app = Flask(__name__)
+cors = CORS(app)
 
-@app.route('/transcribe', methods=['POST'])
-def transcribe():
+@app.route('/summarize', methods=['POST'])
+def summarize():
     # Check if the POST request has a file attached
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
